@@ -3,6 +3,7 @@ import os
 import random
 from tkinter import *
 from tkinter import filedialog
+from operator import itemgetter
 
 
 def choose_path():
@@ -12,19 +13,30 @@ def choose_path():
 
 def generate_dataset():
     file = name_variable.get()
+
+
     arrival_time = [arrival_min_entry.get(), arrival_max_entry.get()]
     burst_time = [burst_min_entry.get(), burst_max_entry.get()]
+
+    if int(burst_min_entry.get()) == 0:
+        burst_time[0] = 1
 
     if len(file) > 3 or file[-4:] != ".csv":
         file += ".csv"
 
     write = open(str(path_variable.get())+"/"+file, "w")
     out = "id, arrival_time, burst_time\n"
-    for i in range(1, int(processes_num_entry.get())+1):
-        curr = (f'{i},{random.randint(int(arrival_time[0]), int(arrival_time[1]))},'
-                f'{random.randint(int(burst_time[0]), int(burst_time[1]))} ')
 
-        out += curr + "\n"
+    tmp = []
+    for i in range(1, int(processes_num_entry.get())+1):
+        curr = [random.randint(int(arrival_time[0]), int(arrival_time[1])), random.randint(int(burst_time[0]), int(burst_time[1]))]
+
+        tmp.append(curr)
+
+    tmp = sorted(tmp, key=lambda x: x[0])
+
+    for i in range(len(tmp)):
+        out += f"{i+1}, {tmp[i][0]}, {tmp[i][1]}\n"
 
     write.write(out)
 
