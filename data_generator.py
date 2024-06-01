@@ -7,7 +7,7 @@ from operator import itemgetter
 
 
 def choose_path():
-    filename = filedialog.askdirectory(initialdir=os.getcwd()+"/tests")
+    filename = filedialog.askdirectory(initialdir=os.getcwd()+"/scheduling_tests")
     path_variable.set(filename)
 
 

@@ -1,28 +1,37 @@
 # First Come First Serve
 
-import os
-from main import *
+# defining function
+def first_come_first_serve(data_sets):
+    # outputting message to recognize currently used algorithm
+    print("Now using First Come First Serve")
+    print("-"*40)
 
-data = import_data()
+    # variable test is used to recognize different tests output
+    tests = 1
 
-print(data)
+    # iterating through different test
+    for curr in data_sets:
 
-for curr in data:
-    elapsed_time = 0
-    waiting_times = []
-    turn_around_times = []
+        # defining elapsed time
+        elapsed_time = 0
 
-    for i in curr:
-        print(i)
-        waiting_times.append(elapsed_time - int(i["arrival_time"]))
-        if elapsed_time < int(i['arrival_time']):
-            elapsed_time += (int(i["arrival_time"]) - elapsed_time)
+        # iterating through different processes
+        for i in curr:
 
-        elapsed_time += int(i["burst_time"])
-        turn_around_times.append(elapsed_time - int(i["arrival_time"]))
+            # calculating waiting time for each task
+            i["waiting_time"] = elapsed_time - int(i["arrival_time"])
 
-        print(elapsed_time)
-        print(f"AVG turn around time: {sum(turn_around_times)/len(turn_around_times)}")
-        print(f"AVG waiting time: {sum(waiting_times)/len(waiting_times)}")
+            # if arrival time is yet to pass, we're adding to elapsed time
+            if elapsed_time < int(i['arrival_time']):
+                elapsed_time += (int(i["arrival_time"]) - elapsed_time)
 
+            # adding burst time of task to elapsed time
+            elapsed_time += int(i["burst_time"])
 
+            # calculating turn around time for each task
+            i["turn_around_time"] = elapsed_time - int(i["arrival_time"])
+
+        # outputing test number, average turn around time and average waiting time
+        print(f"Test number: {tests}")
+        print(f"AVG turn around time: {sum(i['waiting_time'] for i in curr) / len(curr)}")
+        print(f"AVG waiting time: {sum(i['turn_around_time'] for i in curr) / len(curr)}")
