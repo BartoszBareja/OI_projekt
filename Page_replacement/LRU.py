@@ -3,6 +3,7 @@
 from imports import *
 
 
+# function to check if page with given number exists in array
 def check_if_value_exists(value, array):
     for i in array:
         if i["number"] == int(value):
@@ -10,37 +11,57 @@ def check_if_value_exists(value, array):
     return False
 
 
-data = import_replacement_data()
+def least_recently_used(data, capacity):
+    # function to import data from file
+    data = import_replacement_data()
 
-page_frame_numbers = 3
+    for i in data:
+        # declaring variable to store the size of page buffer
+        page_frame_numbers = capacity
 
-for page_set in data:
-    pages = []
-    page_failures = 0
-    for i in page_set:
-        print(pages)
-        if len(pages) < page_frame_numbers and not check_if_value_exists(i, pages):
-            pages.append({"number": int(i), "last_used": 0})
-            page_failures += 1
-        else:
+        # iterating through sets of pages from given data
+        for page_set in data:
 
-            value = check_if_value_exists(i, pages)
+            # declaring buffer to store pages
+            pages = []
 
-            if value == False:
-                page_failures += 1
+            # declaring variable to store number of page faults
+            page_failures = 0
 
-                max_time = max(pages, key=lambda x: x["last_used"])
+            # iterating through pages in page set
+            for i in page_set:
 
-                for j in range(len(pages)):
-                    if pages[j] == max_time:
-                        pages[j] = {"number": int(i), "last_used": 0}
+                # if there is free space in buffer, and given value is not yet in buffer
+                if len(pages) < page_frame_numbers and not check_if_value_exists(i, pages):
+                    pages.append({"number": int(i), "last_used": 0})
+                    page_failures += 1
+                else:
 
-            else:
-                for j in range(len(pages)):
-                    if pages[j] == value:
-                        pages[j]["last_used"] = 0
+                    # variable to store and check whether given value is present in buffer
+                    value = check_if_value_exists(i, pages)
 
-        for i in pages:
-            i["last_used"] = int(i["last_used"]) + 1
+                    # if given page is not yet in buffer
+                    if not value:
+                        page_failures += 1
 
-    print(f"page failures: {page_failures}")
+                        # outputting page with the highest value of "last_used"
+                        max_time = max(pages, key=lambda x: x["last_used"])
+
+                        # swapping page with the highest "last_used" with freshly input page
+                        for j in range(len(pages)):
+                            if pages[j] == max_time:
+                                pages[j] = {"number": int(i), "last_used": 0}
+
+                    # if given page is in buufer
+                    else:
+                        # finding page with the same number as given, and updating the last time it was used
+                        for j in range(len(pages)):
+                            if pages[j] == value:
+                                pages[j]["last_used"] = 0
+
+                # at the end of each load of page, increase each page size by 1
+                for i in pages:
+                    i["last_used"] = int(i["last_used"]) + 1
+
+            # outputting final value of page failures
+            print(f"page failures: {page_failures}")

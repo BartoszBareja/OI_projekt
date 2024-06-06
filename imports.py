@@ -29,9 +29,15 @@ def import_scheduling_data():
 
 def import_replacement_data():
     data_out = []
+    files = os.listdir("./replacement_tests")
 
-    curr = open(f"./replacement_tests/tests.txt", "r")
-    lines = curr.readlines()
+    print(files)
+
+    for file in files:
+        curr = open(f"./replacement_tests/{file}", "r")
+        lines = curr.readlines()
+        print(lines)
+
     for line in lines:
         data_out.append(line.strip().split(","))
 

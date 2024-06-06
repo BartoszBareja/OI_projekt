@@ -3,6 +3,8 @@
 from imports import *
 
 data = import_replacement_data()
+print(data)
+print(data)
 
 
 # function to check if a value of given number exists in array
@@ -27,6 +29,8 @@ def most_frequently_used(data, capacity):
 
         # iterating through different page numbers
         for i in data_set:
+
+            print(pages)
 
             # if there is page to be loaded which already isn't in array, add page and increase paging errors number
             if len(pages) < capacity and not check_if_value_exists(i, pages):
