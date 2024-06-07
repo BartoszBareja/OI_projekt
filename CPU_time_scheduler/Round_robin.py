@@ -1,5 +1,5 @@
 # Round Robin
-
+import outports
 from imports import *
 from copy import deepcopy
 
@@ -74,5 +74,7 @@ def round_robin(data, fixed_quantum):
         print(f"AVG turn around time: {sum(i['turn_around_time'] for i in data_out) / len(data_out)}")
         print(f"AVG waiting time: {sum(i['waiting_time'] for i in data_out) / len(data_out)}")
         print(f"AVG whole time: {sum(i['whole_time'] for i in data_out) / len(data_out)}")
+
+        outports.outport("round_robin", tests, data_out)
 
         tests += 1

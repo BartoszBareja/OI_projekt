@@ -1,12 +1,14 @@
 # First Come First Serve
 
+from outports import outport
+
 # defining function
 def first_come_first_serve(data_sets):
     # outputting message to recognize currently used algorithm
     print("Now using First Come First Serve")
     print("-" * 40)
 
-    # variable test is used to recognize different tests output
+    # variable test is used to recognize different scheduling_tests output
     tests = 1
 
     # iterating through different test
@@ -38,4 +40,5 @@ def first_come_first_serve(data_sets):
         print(f"AVG waiting time: {sum(i['waiting_time'] for i in curr) / len(curr)}")
         print(f"AVG turnaround time: {sum(i['turn_around_time'] for i in curr) / len(curr)}")
         print(f"AVG whole time: {sum(i['whole_time'] for i in curr) / len(curr)}")
+        outport("FCFS",tests, curr)
         tests += 1
