@@ -60,24 +60,16 @@ name_entry = Entry(windows, textvariable=name_variable)
 processes_num_label = Label(windows, text="Please input amount of processes in file")
 processes_num_entry = Entry(windows, )
 
-arrival_label1 = Label(windows, text="Please input/select min time for your processes")
-arrival_min_radio1 = Radiobutton(windows, text="0")
-arrival_min_radio2 = Radiobutton(windows, text="25")
+arrival_label1 = Label(windows, text="Please input/select min arrival time for your processes")
 arrival_min_entry = Entry(windows, )
 
-arrival_label2 = Label(text="Please input/select max time for your processes")
-arrival_max_radio1 = Radiobutton(windows, text="50")
-arrival_max_radio2 = Radiobutton(windows, text="100")
+arrival_label2 = Label(text="Please input/select max arrival time for your processes")
 arrival_max_entry = Entry(windows, )
 
 burst_label1 = Label(windows, text="Please input/select min burst time for your processes")
-burst_min_radio1 = Radiobutton(windows, text="0")
-burst_min_radio2 = Radiobutton(windows, text="25")
 burst_min_entry = Entry(windows, )
 
 burst_label2 = Label(text="Please input/select max burst time for your processes")
-burst_max_radio1 = Radiobutton(windows, text="50")
-burst_max_radio2 = Radiobutton(windows, text="100")
 burst_max_entry = Entry(windows, )
 
 gen_button = Button(windows, text="Generate data", command=generate_dataset)

@@ -45,7 +45,8 @@ def round_robin(data, fixed_quantum):
                 if int(stack[0]["burst_time"]) == 0:
                     stack[0]["done_time"] = elapsed_time
                     stack[0]["waiting_time"] = elapsed_time - int(stack[0]["arrival_time"]) - int((get_item_by_id(curr, stack[0]["id"]))["burst_time"])
-                    stack[0]["turn_around_time"] = elapsed_time - stack[0]["waiting_time"]
+                    stack[0]["turn_around_time"] = elapsed_time - int(stack[0]["arrival_time"])
+                    stack[0]["whole_time"] = elapsed_time
                     data_out.append(stack[0])
                     quantum = fixed_quantum
                     stack.pop(0)
@@ -57,7 +58,7 @@ def round_robin(data, fixed_quantum):
                     arrival_queue.pop(0)
 
             # if quantum equals zero, reset it, and replace top task in stack
-            if quantum == 0:
+            if quantum == 0 and stack:
                 quantum = fixed_quantum
                 stack.append(stack[0])
                 stack.pop(0)
@@ -65,10 +66,13 @@ def round_robin(data, fixed_quantum):
             # increase elapsed time, and decrease quantum
             elapsed_time += 1
             quantum -= 1
+        print(stack)
 
+        print(data_out)
         # outputting test number, average turn around time and average waiting time
         print(f"Test number: {tests}")
-        print(f"AVG turn around time: {sum(i['waiting_time'] for i in data_out) / len(data_out)}")
-        print(f"AVG waiting time: {sum(i['turn_around_time'] for i in data_out) / len(data_out)}")
+        print(f"AVG turn around time: {sum(i['turn_around_time'] for i in data_out) / len(data_out)}")
+        print(f"AVG waiting time: {sum(i['waiting_time'] for i in data_out) / len(data_out)}")
+        print(f"AVG whole time: {sum(i['whole_time'] for i in data_out) / len(data_out)}")
 
         tests += 1
