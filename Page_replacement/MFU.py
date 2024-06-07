@@ -10,9 +10,10 @@ def check_if_value_exists(value, array):
 
 # declaring function to use MFU
 def most_frequently_used(data, capacity):
-    print("Now using Most Frequently Used")
+    print(f"Now using Most Frequently Used with capacity: {capacity}")
     print("-" * 40)
     tests = 1
+
     # iterating through different data sets
     for data_set in data:
 

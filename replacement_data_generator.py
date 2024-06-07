@@ -7,7 +7,7 @@ from operator import itemgetter
 
 
 def choose_path():
-    filename = filedialog.askdirectory(initialdir=os.getcwd() + "/scheduling_tests")
+    filename = filedialog.askdirectory(initialdir=os.getcwd() + "/replacement_tests/test1.csv")
     path_variable.set(filename)
 
 
@@ -48,13 +48,9 @@ pages_num_label = Label(windows, text="Please input amount of pages in file")
 pages_num_entry = Entry(windows, )
 
 pages_num_label1 = Label(windows, text="Please input/select min num for your pages")
-pages_num_min_radio1 = Radiobutton(windows, text="0")
-pages_num_min_radio2 = Radiobutton(windows, text="25")
 pages_num_min_entry = Entry(windows, )
 
 pages_num_label2 = Label(text="Please input/select max num for your pages")
-pages_num_max_radio1 = Radiobutton(windows, text="50")
-pages_num_max_radio2 = Radiobutton(windows, text="100")
 pages_num_max_entry = Entry(windows, )
 
 gen_button = Button(windows, text="Generate data", command=generate_dataset)

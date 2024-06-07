@@ -36,7 +36,7 @@ def import_replacement_data():
         curr = open(f"./replacement_tests/{file}", "r")
         lines = curr.readlines()
 
-    for line in lines:
-        data_out.append(line.strip().split(","))
+        for line in lines:
+            data_out.append(line.strip().split(","))
 
     return data_out

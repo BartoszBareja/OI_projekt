@@ -13,7 +13,7 @@ def get_item_by_id(array, id):
 
 def round_robin(data, fixed_quantum):
     # outputting message to recognize currently used algorithm
-    print("Now using Round Robin")
+    print(f"Now using Round Robin, with quantum: {fixed_quantum}")
     print("-" * 40)
 
     tests = 1
@@ -66,9 +66,6 @@ def round_robin(data, fixed_quantum):
             # increase elapsed time, and decrease quantum
             elapsed_time += 1
             quantum -= 1
-        print(stack)
-
-        print(data_out)
         # outputting test number, average turn around time and average waiting time
         print(f"Test number: {tests}")
         print(f"AVG turn around time: {sum(i['turn_around_time'] for i in data_out) / len(data_out)}")

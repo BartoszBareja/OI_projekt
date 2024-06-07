@@ -63,3 +63,4 @@ def last_come_first_serve(data):
         print(f"AVG turnover time: {sum(i['turn_around_time'] for i in stack_out) / len(stack_out)}")
         print(f"AVG whole time: {sum(i['whole_time'] for i in stack_out) / len(stack_out)}")
         outports.outport("LCFS", tests, stack_out)
+        tests+=1
