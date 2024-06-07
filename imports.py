@@ -1,10 +1,15 @@
 import os
 
 
+# function to import scheduling data
 def import_scheduling_data():
+    # initializing array to store data to import
     data_out = []
+
+    # getting an array of files in given path
     files = os.listdir("./scheduling_tests")
 
+    # iterating through files and adding them to dict, which later is being added to output data
     for file in files:
         curr = open(f"./scheduling_tests/{file}", "r")
 
@@ -27,11 +32,15 @@ def import_scheduling_data():
     return data_out
 
 
+# function to import replacement data
 def import_replacement_data():
+    # initializing array to store data to import
     data_out = []
+
+    # getting an array of files in given path
     files = os.listdir("./replacement_tests")
 
-
+    # iterating through files and adding them to array, which later will  be added to output data
     for file in files:
         curr = open(f"./replacement_tests/{file}", "r")
         lines = curr.readlines()
